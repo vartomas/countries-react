@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import './base.scss'
+import Nav from './nav/Nav'
+import Main from './main/Main'
 
 function App() {
+  const [darkMode, setDarkMode] = useState(false)
+
+  useEffect(() => {
+    darkMode ? document.querySelector('.wrapper').classList.add('darkBackground')
+    : document.querySelector('.wrapper').classList.remove('darkBackground')
+  }, [darkMode])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='wrapper'>
+      <Nav dark={darkMode} switch={() => setDarkMode(!darkMode)}/>
+      <Main dark={darkMode}/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
